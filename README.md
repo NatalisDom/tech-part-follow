@@ -5,4 +5,4 @@
 и настройки дополнительных возможностей
 [обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
 
-
+It is a test proect for user's tweet cards, created by React. You can evaluate the work of the project
