@@ -1,4 +1,4 @@
-import style from './ButtonBurger.module.css';
+import style from './ButtonBurger.module.scss';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,7 @@ const ButtonBurger = ({ isMenuOpen, onClick }) => {
       <div
         className={clsx(style.line_top, isMenuOpen && style.rotate_left)}
       ></div>
-      <div className={clsx(scc.line_center, isMenuOpen && style.hide)}></div>
+      <div className={clsx(style.line_center, isMenuOpen && style.hide)}></div>
       <div
         className={clsx(style.line_bottom, isMenuOpen && style.rotate_right)}
       ></div>
