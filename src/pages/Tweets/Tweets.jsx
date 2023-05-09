@@ -1,92 +1,61 @@
-import css from './Tweets.module.css';
-import { ReactComponent as BoyImg } from '../../img/Boy.svg';
+import style from './Tweets.module.scss';
+import Tweet from 'components/Tweet/Tweet';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { follow, unfollow } from 'redux/operations';
-import { setFollow, unsetFollow } from 'redux/followSlise';
-import { getIsFollow } from 'redux/selectors';
+import { fetchTweets } from 'redux/operations';
+import { getTweets } from 'redux/selectors';
+import { useNavigate } from 'react-router-dom';
 
-import ButtonFollow from 'components/ButtunFollow/ButtunFollow';
-
-const Tweet = ({ tweet }) => {
+const Tweets = () => {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
-  const isFolow = useSelector(getIsFollow);
-  const isFollowId = isFolow.map(({ user }) => Number(user.id));
+  const navigate = useNavigate();
+  const [showBtn, setShowBtn] = useState(true);
+
+  const tweets = useSelector(getTweets);
 
   useEffect(() => {
-    if (isFollowId.find(id => id === Number(tweet.id))) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }, [isFollowId, tweet]);
+    dispatch(fetchTweets());
+  }, [dispatch]);
 
-  const formatted = number => {
-    const stringNumber = number.toString();
-
-    let formattedNumber;
-
-    if (stringNumber.length >= 4 && stringNumber.length <= 6) {
-      formattedNumber =
-        stringNumber.slice(0, stringNumber.length - 3) +
-        ',' +
-        stringNumber.slice(stringNumber.length - 3, stringNumber.length);
-    }
-
-    if (stringNumber.length >= 7 && stringNumber.length <= 9) {
-      formattedNumber =
-        stringNumber.slice(0, stringNumber.length - 6) +
-        ',' +
-        stringNumber.slice(stringNumber.length - 6, stringNumber.length - 3) +
-        ',' +
-        stringNumber.slice(stringNumber.length - 3, stringNumber.length);
-    }
-
-    return formattedNumber;
+  const handlerClick = e => {
+    navigate('/');
   };
 
-  const handleClick = () => {
-    if (!isActive) {
-      dispatch(setFollow(tweet));
-      dispatch(follow(tweet)).then(() => setIsActive(!isActive));
-    } else {
-      dispatch(unsetFollow(tweet));
-      dispatch(unfollow(tweet)).then(() => setIsActive(!isActive));
+  const currentTweets = () => {
+    if (showBtn) {
+      return tweets.slice(0, 3);
     }
+    return tweets;
+  };
+  const handlerLoadMore = () => {
+    setShowBtn(!showBtn);
   };
 
   return (
-    <article className={css.tweet}>
-      <h1 className={css.tweet__title}>tweet</h1>
-      <div className={css.tweet__container}>
-        <div className={css.tweet__tumb}>
-          <BoyImg
-            className={css.tweet__boyImg}
-            width={80}
-            height={80}
-            viewBox="5 0 80 80"
-          />
-          <img
-            className={css.tweet__avatarImg}
-            src={tweet.avatar}
-            alt={tweet.user}
-            width={62}
-            height={62}
-          />
+    <>
+      <section className={style.tweets__section}>
+        <button
+          className={style.tweets__back_button}
+          onClick={e => handlerClick(e)}
+        >
+          Back
+        </button>
+        <div className={style.tweets__container}>
+          {currentTweets().map(tweet => {
+            return <Tweet key={tweet.id} tweet={tweet} />;
+          })}
         </div>
-        <p className={css.tweet__tweet_quantity}>
-          {' '}
-          {`${formatted(tweet.tweets)} tweets`}
-        </p>
-        <p className={css.tweet__followers_quantity}>
-          {' '}
-          {`${formatted(tweet.followers)} followers`}
-        </p>
-        <ButtonFollow isActive={isActive} onClick={handleClick} />
-      </div>
-    </article>
+        {showBtn && (
+          <button
+            className={style.tweets__buttom_more}
+            onClick={handlerLoadMore}
+          >
+            Load More
+          </button>
+        )}
+      </section>
+    </>
   );
 };
 
-export default Tweet;
+export default Tweets;

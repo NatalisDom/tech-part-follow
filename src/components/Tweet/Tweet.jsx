@@ -1,4 +1,4 @@
-import style from './tweet.module.scss';
+import style from './Tweet.module.scss';
 import { ReactComponent as BoyImg } from '../../img/Boy.svg';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { follow, unfollow } from 'redux/operations';
 import { setFollow, unsetFollow } from 'redux/followSlise';
 import { getIsFollow } from 'redux/selectors';
 
-import FollowButton from 'components/FollowButton/FollowButton';
+import FollowButton from 'components/ButtunFollow/ButtunFollow';
 
 const Tweet = ({ tweet }) => {
   const dispatch = useDispatch();

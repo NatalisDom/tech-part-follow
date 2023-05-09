@@ -1,7 +1,7 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 export const followSlice = createSlice({
-  name: "isFollow",
+  name: 'isFollow',
   initialState: [],
   reducers: {
     setFollow: {

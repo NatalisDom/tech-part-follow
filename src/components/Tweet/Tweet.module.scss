@@ -6,59 +6,47 @@
 
     width: 380px;
     height: 460px;
-
+    margin: 27px;
     border-radius: 20px;
+
+    cursor: default;
 
     background: url(../../img/Logo.svg), url(../../img/picture.svg), linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%);
     background-repeat: no-repeat;
     background-position: 20px 20px, 36px 28px, 0 0;
     box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
 
-}
 
-.tweet__title {
-    position: absolute;
+
+    &__title {
+        position: absolute;
         width: 1px;
         height: 1px;
         margin: -1px;
         padding: 0;
         overflow: hidden;
         border: 0;
-}
+    }
 
-.tweet__container {
-     display: flex;
+    &__container {
+        display: flex;
         flex-direction: column;
         align-items: center;
 
         padding-bottom: 36px;
-}
+    }
 
-.logo__container {
-    position: absolute;
-        top: 20px;
-        left: 20px;
-}
+   
 
-.tweet__tumb {
-    display: flex;
+    &__tumb {
+        position: relative;
+
+        display: flex;
         align-items: center;
         margin-bottom: 26px;
 
-        
-}
 
-.tweet::before {
-            content: '';
-            display: block;
-
-            width: 150px;
-            height: 8px;
-
-            background: #EBD8FF;
-            box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
-        }
-.tweet::after {
+        &::before {
             content: '';
             display: block;
 
@@ -69,12 +57,32 @@
             box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
         }
 
-       
-    .twwet__boyImg {
+        &::after {
+            content: '';
+            display: block;
+
+            width: 150px;
+            height: 8px;
+
+            background: #EBD8FF;
+            box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
+        }
+    }
+
+    &__boyImg {
         display: block;
     }
 
-.tweet__tweet_quantity {
+    &__avatarImg {
+        position: absolute;
+        top: 9px;
+        left: 159px;
+        border-radius: 50%;
+    }
+
+    &__img {}
+
+    &__tweet_quantity {
         margin-bottom: 16px;
 
         font-family: 'Montserrat';
@@ -86,7 +94,7 @@
         color: #EBD8FF;
     }
 
-    .tweet__followers_quantity {
+    &__followers_quantity {
         margin-bottom: 26px;
 
         font-family: 'Montserrat';
@@ -97,3 +105,4 @@
 
         color: #EBD8FF;
     }
+}
